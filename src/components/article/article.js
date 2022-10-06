@@ -2,7 +2,8 @@ import './article.less'
 // This is the data we will be using to create our articles. Look at it, then proceed to line 93.
 // OPTIONAL: if you're feeling adventurous, try to make this data an export from a different module, and import it here.
 // You can read about ES6 modules here: https://exploringjs.com/es6/ch_modules.html#sec_basics-of-es6-modules
-const data = [
+
+export const data = [
   {
     title: 'BloomTech Students: "We\'re the best!"',
     date: 'Nov 5th, 2018',
@@ -115,3 +116,50 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+
+function articleMaker(newArticle) {
+    const article = document.createElement("div");
+    const title = document.createElement("h2");
+    const date = document.createElement("p");
+    const p1 = document.createElement("p");
+    const p2 = document.createElement("p");
+    const p3 = document.createElement("p");
+    const span = document.createElement("span");
+
+    article.appendChild(title);
+    article.appendChild(date);
+    article.appendChild(p1);
+    article.appendChild(p2);
+    article.appendChild(p3);
+    article.appendChild(span);
+
+    title.className = "article-title";
+    date.className = "article-date";
+    p1.className = "paragraph1";
+    p2.className = "paragraph2";
+    p3.className = "paragraph3";
+    span.className = "expandButton";
+
+    title.textContent = newArticle.title;
+    date.textContent = newArticle.date;
+    p1.textContent = newArticle.firstParagraph;
+    p2.textContent = newArticle.secondParagraph;
+    p3.textContent = newArticle.thirdParagraph;
+    span.textContent = '+';
+
+    span.addEventListener('click', () => {
+      article.classList.toggle('article-open');
+    });
+
+
+    return article;
+};
+
+
+const articleThing = document.querySelector(".articles");
+
+data.forEach( (article) => {
+  let thing = articleMaker(article);
+  articleThing.appendChild(thing);
+});
